@@ -40,40 +40,39 @@ export default function OscillatorPanel(props: OscillatorPanelProps) {
       height: 110,
       layout: {
         background: { type: ColorType.Solid, color: "transparent" },
-        textColor: "#9a9890",
+        textColor: "oklch(0.68 0.01 258)",
       },
-      grid: {
-        vertLines: { color: "rgba(150,150,150,0.06)" },
-        horzLines: { color: "rgba(150,150,150,0.06)" },
+   grid: {
+        vertLines: { color: "oklch(0.32 0.02 258 / 0.3)" },
+        horzLines: { color: "oklch(0.32 0.02 258 / 0.3)" },
       },
-      timeScale: { borderColor: "rgba(150,150,150,0.2)" },
-      rightPriceScale: { borderColor: "rgba(150,150,150,0.2)" },
+      timeScale: { borderColor: "oklch(0.32 0.02 258)" },
+      rightPriceScale: { borderColor: "oklch(0.32 0.02 258)" },
     });
     chartRef.current = chart;
 
     if (props.kind === "rsi") {
       const rsiSeries = chart.addLineSeries({
-        color: "#D85A30",
+        color: "oklch(0.68 0.20 25)",
         lineWidth: 2,
         priceLineVisible: false,
       });
       rsiSeries.setData(props.data as LineData[]);
-      rsiSeries.createPriceLine({ price: 70, color: "#888780", lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "70" });
-      rsiSeries.createPriceLine({ price: 30, color: "#888780", lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "30" });
+      rsiSeries.createPriceLine({ price: 70, color: "oklch(0.48 0.01 258)", lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "70" });
+      rsiSeries.createPriceLine({ price: 30, color: "oklch(0.48 0.01 258)", lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "30" });
     } else {
       const histSeries = chart.addHistogramSeries({ priceLineVisible: false });
       const histData: HistogramData[] = props.histogram.map((p) => ({
         time: p.time as HistogramData["time"],
         value: p.value,
-        color: p.value >= 0 ? "#5DCAA5" : "#E24B4A",
+        color: p.value >= 0 ? "oklch(0.74 0.18 148)" : "oklch(0.68 0.20 25)",
       }));
       histSeries.setData(histData);
 
-      const macdSeries = chart.addLineSeries({ color: "#378ADD", lineWidth: 2, priceLineVisible: false });
+      const macdSeries = chart.addLineSeries({ color: "oklch(0.68 0.17 250)", lineWidth: 2, priceLineVisible: false });
       macdSeries.setData(props.macdLine as LineData[]);
 
-      const signalSeries = chart.addLineSeries({ color: "#BA7517", lineWidth: 2, priceLineVisible: false });
-      signalSeries.setData(props.signalLine as LineData[]);
+      const signalSeries = chart.addLineSeries({ color: "oklch(0.75 0.15 70)", lineWidth: 2, priceLineVisible: false });
     }
 
     chart.timeScale().fitContent();
@@ -100,7 +99,7 @@ export default function OscillatorPanel(props: OscillatorPanelProps) {
           display: "flex",
           justifyContent: "space-between",
           fontSize: 12,
-          color: "#9a9890",
+          color: "oklch(0.68 0.01 258)",
           marginBottom: 4,
         }}
       >
