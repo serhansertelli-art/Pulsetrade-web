@@ -46,8 +46,11 @@ export default function PriceChart({
         textColor: "oklch(0.68 0.01 258)",
       },
       grid: {
-        vertLines: { color: "rgba(150,150,150,0.08)" },
-        horzLines: { color: "rgba(150,150,150,0.08)" },
+        vertLines: { color: "oklch(0.32 0.02 258 / 0.35)" },
+        horzLines: { color: "oklch(0.32 0.02 258 / 0.35)" },
+      },
+      timeScale: { borderColor: "oklch(0.32 0.02 258)" },
+      rightPriceScale: { borderColor: "oklch(0.32 0.02 258)" },
       },
       timeScale: { borderColor: "rgba(150,150,150,0.2)" },
       rightPriceScale: { borderColor: "rgba(150,150,150,0.2)" },
@@ -55,11 +58,11 @@ export default function PriceChart({
     });
 
     const candleSeries = chart.addCandlestickSeries({
-      upColor: "#1D9E75",
-      downColor: "#D85A30",
+      upColor: "oklch(0.74 0.18 148)",
+      downColor: "oklch(0.68 0.20 25)",
       borderVisible: false,
-      wickUpColor: "#1D9E75",
-      wickDownColor: "#D85A30",
+      wickUpColor: "oklch(0.74 0.18 148)",
+      wickDownColor: "oklch(0.68 0.20 25)",
     });
 
     chartRef.current = chart;
