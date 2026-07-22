@@ -31,9 +31,9 @@ export function generateMockCandles(
 
 function fallbackCandles(symbol: string, intervalSeconds: number): Candle[] {
   const startPriceBySymbol: Record<string, number> = {
-    "XAU/USD": 2418.6,
-    "EUR/USD": 1.0862,
-    "BTC/USD": 64250,
+    "XAU/USD": 4155,
+    "EUR/USD": 1.141,
+    "BTC/USD": 66000,
   };
   const startPrice = startPriceBySymbol[symbol] ?? 100;
   return generateMockCandles(180, startPrice, intervalSeconds);
