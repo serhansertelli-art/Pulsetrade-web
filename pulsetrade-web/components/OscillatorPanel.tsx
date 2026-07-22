@@ -54,7 +54,7 @@ export default function OscillatorPanel(props: OscillatorPanelProps) {
     if (props.kind === "rsi") {
       const rsiSeries = chart.addLineSeries({
         color: "#D85A30",
-        lineWidth: 1.5,
+        lineWidth: 2,
         priceLineVisible: false,
       });
       rsiSeries.setData(props.data as LineData[]);
@@ -69,10 +69,10 @@ export default function OscillatorPanel(props: OscillatorPanelProps) {
       }));
       histSeries.setData(histData);
 
-      const macdSeries = chart.addLineSeries({ color: "#378ADD", lineWidth: 1.5, priceLineVisible: false });
+      const macdSeries = chart.addLineSeries({ color: "#378ADD", lineWidth: 2, priceLineVisible: false });
       macdSeries.setData(props.macdLine as LineData[]);
 
-      const signalSeries = chart.addLineSeries({ color: "#BA7517", lineWidth: 1.5, priceLineVisible: false });
+      const signalSeries = chart.addLineSeries({ color: "#BA7517", lineWidth: 2, priceLineVisible: false });
       signalSeries.setData(props.signalLine as LineData[]);
     }
 
