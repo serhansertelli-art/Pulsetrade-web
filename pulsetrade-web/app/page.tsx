@@ -35,6 +35,41 @@ export default function Home() {
     };
   }, [symbol, timeframeSeconds]);
 
+  // Canlı fiyat: her 5 saniyede bir anlık fiyatı çek, son mumu güncelle.
+  useEffect(() => {
+    let cancelled = false;
+
+    const poll = async () => {
+      try {
+        const response = await fetch(
+          `/api/quote?symbol=${encodeURIComponent(symbol)}`
+        );
+        const payload = await response.json();
+        if (cancelled || !response.ok || typeof payload.price !== "number") return;
+
+        setCandles((prev) => {
+          if (prev.length === 0) return prev;
+          const updated = [...prev];
+          const last = { ...updated[updated.length - 1] };
+          last.close = payload.price;
+          last.high = Math.max(last.high, payload.price);
+          last.low = Math.min(last.low, payload.price);
+          updated[updated.length - 1] = last;
+          return updated;
+        });
+      } catch {
+        // Sessizce yut — bir sonraki döngüde tekrar denenecek.
+      }
+    };
+
+    poll();
+    const intervalId = setInterval(poll, 5000);
+    return () => {
+      cancelled = true;
+      clearInterval(intervalId);
+    };
+  }, [symbol]);
+
   const toggleIndicator = (id: IndicatorId) => {
     setActiveIndicators((prev) => {
       const next = new Set(prev);
