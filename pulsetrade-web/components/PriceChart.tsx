@@ -43,7 +43,7 @@ export default function PriceChart({
       height: 320,
       layout: {
         background: { type: ColorType.Solid, color: "transparent" },
-        textColor: "#9a9890",
+        textColor: "oklch(0.68 0.01 258)",
       },
       grid: {
         vertLines: { color: "rgba(150,150,150,0.08)" },
